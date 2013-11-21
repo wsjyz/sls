@@ -110,8 +110,6 @@
             <scope>compile</scope>
         </dependency>
 
-
-
         <dependency>
             <groupId>commons-fileupload</groupId>
             <artifactId>commons-fileupload</artifactId>
@@ -141,6 +139,11 @@
             <artifactId>commons-logging</artifactId>
             <version>1.1.1</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.2.1</version>
         </dependency>
 
         <dependency>

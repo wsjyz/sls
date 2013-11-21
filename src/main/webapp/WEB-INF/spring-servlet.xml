@@ -28,6 +28,7 @@
             <list>
                 <value>classpath:c3p0.properties</value>
                 <value>classpath:jdbc.properties</value>
+                <value>classpath:redis.properties</value>
             </list>
         </property>
     </bean>
@@ -134,5 +135,20 @@
         <!-- 最大1GB -->
         <property name="maxUploadSize" value="1000000000"></property>
     </bean>
+
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxActive" value="${jedis.maxActive}"/>
+        <property name="maxWait" value="${jedis.maxWait}"/>
+    </bean>
+
+    <!-- 普通redis -->
+    <bean id="jedis" class="com.eighthinfo.sls.utils.RedisFactoryBean">
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+        <constructor-arg index="1" value="${redis.host}"/>
+        <constructor-arg index="2" value="${redis.Port}"/>
+    </bean>
+
+    <bean class="com.eighthinfo.sls.utils.ApplicationContextWrapper"/>
 
 </beans>

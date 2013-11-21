@@ -11,6 +11,8 @@ public class User {
 
     private String userName;
 
+    private int male;
+
     public String getUserId() {
         return userId;
     }
@@ -25,5 +27,13 @@ public class User {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public int getMale() {
+        return male;
+    }
+
+    public void setMale(int male) {
+        this.male = male;
     }
 }

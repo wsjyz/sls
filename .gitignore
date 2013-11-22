@@ -5,3 +5,10 @@
 *.war
 *.ear
 .idea
+target
+
+*.iml
+
+*.rdb
+
+*.log

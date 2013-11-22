@@ -1,19 +1,11 @@
 package com.eighthinfo.sls.utils;
 
 
-
-import org.apache.commons.lang.time.StopWatch;
-
-import java.util.HashSet;
-import java.util.Set;
 import java.util.UUID;
 
 /**
- * Created with IntelliJ IDEA.
  * User: dam
  * Date: 13-11-22
- * Time: 上午11:28
- * To change this template use File | Settings | File Templates.
  */
 public class UUIDGen {
 

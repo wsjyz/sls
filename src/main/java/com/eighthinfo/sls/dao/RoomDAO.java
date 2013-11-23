@@ -1,4 +1,4 @@
-package com.eighthinfo.sls.dao.room;
+package com.eighthinfo.sls.dao;
 
 /**
  * @author: Ivan Vigoss

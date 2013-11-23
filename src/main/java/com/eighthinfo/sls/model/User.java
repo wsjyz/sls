@@ -1,17 +1,22 @@
 package com.eighthinfo.sls.model;
 
 /**
- * @author: Ivan Vigoss
- * Date: 13-11-20
- * Time: PM9:05
+ * User: dam
+ * Date: 13-11-23
  */
-public class User {
+public class User extends AbstractModel {
+
+    private static final long serialVersionUID = 3929806284066193169L;
 
     private String userId;
 
     private String userName;
 
-    private int male;
+    private String loginName;
+
+    private String password;
+
+    private String email;
 
     public String getUserId() {
         return userId;
@@ -29,11 +34,27 @@ public class User {
         this.userName = userName;
     }
 
-    public int getMale() {
-        return male;
+    public String getLoginName() {
+        return loginName;
     }
 
-    public void setMale(int male) {
-        this.male = male;
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

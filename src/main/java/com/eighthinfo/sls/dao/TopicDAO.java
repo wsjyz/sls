@@ -1,4 +1,4 @@
-package com.eighthinfo.sls.dao.topic;
+package com.eighthinfo.sls.dao;
 
 /**
  * @author: Ivan Vigoss

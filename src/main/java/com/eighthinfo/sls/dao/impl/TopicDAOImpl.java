@@ -1,5 +1,6 @@
-package com.eighthinfo.sls.dao.topic;
+package com.eighthinfo.sls.dao.impl;
 
+import com.eighthinfo.sls.dao.TopicDAO;
 import org.springframework.stereotype.Service;
 
 /**
@@ -8,5 +9,5 @@ import org.springframework.stereotype.Service;
  * Time: PM2:09
  */
 @Service
-public class TopicDAOImpl implements TopicDAO{
+public class TopicDAOImpl implements TopicDAO {
 }

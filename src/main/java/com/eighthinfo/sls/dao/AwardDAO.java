@@ -5,7 +5,7 @@ package com.eighthinfo.sls.dao;
  * Date: 13-11-21
  * Time: PM2:10
  */
-public interface RoomDAO {
+public interface AwardDAO {
 
 
 }

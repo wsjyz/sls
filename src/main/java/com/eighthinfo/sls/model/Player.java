@@ -1,32 +1,41 @@
 package com.eighthinfo.sls.model;
 
+import com.eighthinfo.sls.utils.ChineseNameGenerator;
+
 /**
+ * 玩家信息
+ *
  * @author: Ivan Vigoss
  * Date: 13-11-20
  * Time: PM9:05
  */
 public class Player {
 
-    private String userId;
+    private String playerId;
 
-    private String userName;
+    private String playerName;
 
     private int male;
 
-    public String getUserId() {
-        return userId;
+    /**
+     * 经验值
+     */
+    private long experience;
+
+    public String getPlayerId() {
+        return playerId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setPlayerId(String playerId) {
+        this.playerId = playerId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public int getMale() {
@@ -35,5 +44,21 @@ public class Player {
 
     public void setMale(int male) {
         this.male = male;
+    }
+
+    public long getExperience() {
+        return experience;
+    }
+
+    public void setExperience(long experience) {
+        this.experience = experience;
+    }
+
+    public static Player newInstance(String playerId) {
+        Player player = new Player();
+        player.setPlayerId(playerId);
+        player.setMale(1);
+        player.setPlayerName(ChineseNameGenerator.getChinaName());
+        return player;
     }
 }

@@ -13,13 +13,13 @@ import java.util.List;
  * Date: 13-11-22
  */
 @Controller
-@RequestMapping(value = "/room")
-public class RoomController {
+@RequestMapping(value = "/award")
+public class AwardController {
 
 
     @ResponseBody
-    @RequestMapping(value = {"/getRoomList"})
-    public List<Award> getRoomList(){
+    @RequestMapping(value = {"/getAwardList"})
+    public List<Award> getAwardList(){
         List<Award> awardList = new ArrayList<Award>();
         return awardList;
     }

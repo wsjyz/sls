@@ -1,6 +1,6 @@
 package com.eighthinfo.sls.dao.impl;
 
-import com.eighthinfo.sls.dao.RoomDAO;
+import com.eighthinfo.sls.dao.AwardDAO;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
  * Date: 13-11-21
  * Time: PM2:11
  */
-@Repository("RoomDAO")
-public class RoomDAOImpl implements RoomDAO {
+@Repository("AwardDAO")
+public class AwardDAOImpl implements AwardDAO {
 
 
 }

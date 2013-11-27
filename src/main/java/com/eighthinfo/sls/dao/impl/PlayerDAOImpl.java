@@ -11,12 +11,12 @@ import org.springframework.stereotype.Repository;
  * Date: 13-11-23
  */
 @Repository("PlayerDAO")
-public class PlayerDAOImpl extends BaseDAO implements PlayerDAO{
+public class PlayerDAOImpl extends BaseDAO implements PlayerDAO {
 
-    private final static String SQL_INSERT = "INSERT INTO t_user (user_id,user_name,male) values (?,?,?)";
-    private final static String SQL_QUERY = "SELECT * FROM t_user WHERE user_id = ?";
-    private final static String SQL_QUERY_BY_NAME = "SELECT * FROM t_user WHERE user_name = ?";
-    private final static String SQL_UPDATE = "UPDATE t_user SET user_id=?,user_name=?,male=? WHERE user_id=?";
+    private final static String SQL_INSERT = "INSERT INTO t_player (player_id,player_name,male,experience) values (?,?,?)";
+    private final static String SQL_QUERY = "SELECT * FROM t_player WHERE player_id = ?";
+    private final static String SQL_QUERY_BY_NAME = "SELECT * FROM t_player WHERE player_name = ?";
+    private final static String SQL_UPDATE_INFO = "UPDATE t_player SET player_name=?,male=? WHERE player_id=?";
 
     @Override
     public Player get(String userId) {
@@ -25,9 +25,9 @@ public class PlayerDAOImpl extends BaseDAO implements PlayerDAO{
 
     @Override
     public void save(Player player) {
-        int affectCount = getJdbcTemplate().update(SQL_UPDATE, player.getUserId(), player.getUserName(), player.getMale(), player.getUserId());
+        int affectCount = getJdbcTemplate().update(SQL_UPDATE_INFO, player.getPlayerName(), player.getMale(), player.getPlayerId());
         if (affectCount == 0) {
-            getJdbcTemplate().update(SQL_INSERT, player.getUserId(), player.getUserName(), player.getMale());
+            getJdbcTemplate().update(SQL_INSERT, player.getPlayerId(), player.getPlayerName(), player.getMale());
         }
     }
 

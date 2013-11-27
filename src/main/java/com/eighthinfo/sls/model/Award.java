@@ -5,9 +5,9 @@ package com.eighthinfo.sls.model;
  * Date: 13-11-21
  * Time: PM1:57
  */
-public class Room {
-    private String roomId;
-    private String roomName;
+public class Award {
+    private String awardId;
+    private String awardName;
     private String bgHref;
     private int remain;
     private int total;
@@ -46,20 +46,20 @@ public class Room {
         this.remain = remain;
     }
 
-    public String getRoomId() {
-        return roomId;
+    public String getAwardId() {
+        return awardId;
     }
 
-    public void setRoomId(String roomId) {
-        this.roomId = roomId;
+    public void setAwardId(String awardId) {
+        this.awardId = awardId;
     }
 
-    public String getRoomName() {
-        return roomName;
+    public String getAwardName() {
+        return awardName;
     }
 
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setAwardName(String awardName) {
+        this.awardName = awardName;
     }
 
     public int getTotal() {

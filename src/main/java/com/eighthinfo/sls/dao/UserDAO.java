@@ -1,6 +1,5 @@
 package com.eighthinfo.sls.dao;
 
-import com.eighthinfo.sls.model.Player;
 import com.eighthinfo.sls.model.User;
 
 /**

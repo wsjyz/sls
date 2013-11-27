@@ -1,11 +1,13 @@
 package com.eighthinfo.sls.controller;
 
 import com.eighthinfo.sls.model.Award;
+import com.eighthinfo.sls.service.AwardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,11 +18,12 @@ import java.util.List;
 @RequestMapping(value = "/award")
 public class AwardController {
 
+    @Autowired
+    private AwardService awardService;
 
     @ResponseBody
-    @RequestMapping(value = {"/getAwardList"})
-    public List<Award> getAwardList(){
-        List<Award> awardList = new ArrayList<Award>();
-        return awardList;
+    @RequestMapping(value = {"/list/{level}"})
+    public List<Award> getAwardList(@PathVariable int level){
+        return awardService.loadAwardListByLevel(level);
     }
 }

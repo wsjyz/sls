@@ -7,6 +7,10 @@ package com.eighthinfo.sls.model;
  */
 public class Award {
     private String awardId;
+    /**
+     * 难度
+     */
+    private int level;
     private String awardName;
     private String bgHref;
     private int remain;
@@ -68,5 +72,13 @@ public class Award {
 
     public void setTotal(int total) {
         this.total = total;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
     }
 }

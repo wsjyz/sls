@@ -28,7 +28,7 @@ public class PlayerController {
      */
     @ResponseBody
     @RequestMapping(value = "/{playerId}", method = RequestMethod.GET)
-    public Player get(@PathVariable("playerId") String playerId) {
+    public Player get(@PathVariable String playerId) {
         Player player = playerService.getById(playerId);
         if (player == null) {//自动注册
             player = Player.newInstance(playerId);

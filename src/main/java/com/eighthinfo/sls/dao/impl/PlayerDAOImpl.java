@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository("PlayerDAO")
 public class PlayerDAOImpl extends BaseDAO implements PlayerDAO {
 
-    private final static String SQL_INSERT = "INSERT INTO t_player (player_id,player_name,male,experience) values (?,?,?)";
+    private final static String SQL_INSERT = "INSERT INTO t_player (player_id,player_name,male) values (?,?,?)";
     private final static String SQL_QUERY = "SELECT * FROM t_player WHERE player_id = ?";
     private final static String SQL_QUERY_BY_NAME = "SELECT * FROM t_player WHERE player_name = ?";
     private final static String SQL_UPDATE_INFO = "UPDATE t_player SET player_name=?,male=? WHERE player_id=?";

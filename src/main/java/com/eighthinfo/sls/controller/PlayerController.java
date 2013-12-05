@@ -2,6 +2,8 @@ package com.eighthinfo.sls.controller;
 
 import com.eighthinfo.sls.model.Player;
 import com.eighthinfo.sls.service.PlayerService;
+import com.eighthinfo.sls.utils.ChineseNameGenerator;
+import com.eighthinfo.sls.utils.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,11 +32,28 @@ public class PlayerController {
     @RequestMapping(value = "/{playerId}", method = RequestMethod.GET)
     public Player get(@PathVariable String playerId) {
         Player player = playerService.getById(playerId);
-        if (player == null) {//自动注册
-            player = Player.newInstance(playerId);
-            playerService.save(player);
-        }
         return player;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public JsonResult register(Player player){
+        player.setExperience(0);//avoid client cheating
+        try {
+            playerService.save(player);
+            return new JsonResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new JsonResult(e.getMessage());
+        }
+
+    }
+
+
+    @ResponseBody
+    @RequestMapping(value = "/randomName", method = RequestMethod.GET)
+    public String randomName() {
+        return ChineseNameGenerator.getChinaName();
     }
 
 

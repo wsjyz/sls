@@ -1,6 +1,8 @@
 package com.eighthinfo.sls.model;
 
 /**
+ * 奖品
+ *
  * @author: Ivan Vigoss
  * Date: 13-11-21
  * Time: PM1:57
@@ -17,6 +19,7 @@ public class Award {
     private int total;
     private String detailHref;
     private String description;
+    private long price;
 
     public String getBgHref() {
         return bgHref;
@@ -80,5 +83,13 @@ public class Award {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public long getPrice() {
+        return price;
+    }
+
+    public void setPrice(long price) {
+        this.price = price;
     }
 }

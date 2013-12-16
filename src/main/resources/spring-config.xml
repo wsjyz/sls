@@ -53,15 +53,4 @@
     </tx:advice>
     <tx:annotation-driven/>
 
-    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
-        <property name="maxActive" value="${jedis.maxActive}"/>
-        <property name="maxWait" value="${jedis.maxWait}"/>
-    </bean>
-
-    <!-- 普通redis -->
-    <bean id="jedis" class="com.eighthinfo.sls.utils.RedisFactoryBean">
-        <constructor-arg index="0" ref="jedisPoolConfig"/>
-        <constructor-arg index="1" value="${redis.host}"/>
-        <constructor-arg index="2" value="${redis.Port}"/>
-    </bean>
 </beans>

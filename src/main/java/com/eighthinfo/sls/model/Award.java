@@ -20,6 +20,18 @@ public class Award {
     private String detailHref;
     private String description;
     private long price;
+    /**
+     * 中奖概率
+     */
+    private Double rateOfWin;
+
+    public Double getRateOfWin() {
+        return rateOfWin;
+    }
+
+    public void setRateOfWin(Double rateOfWin) {
+        this.rateOfWin = rateOfWin;
+    }
 
     public String getBgHref() {
         return bgHref;

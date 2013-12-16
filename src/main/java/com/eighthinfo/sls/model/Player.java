@@ -21,6 +21,30 @@ public class Player {
      * 经验值
      */
     private long experience;
+    /**
+     *当前进度百分比
+     */
+    private float currentExperience;
+    /**
+     *当前级别名称
+     */
+    private String currentTitle;
+
+    public float getCurrentExperience() {
+        return currentExperience;
+    }
+
+    public void setCurrentExperience(float currentExperience) {
+        this.currentExperience = currentExperience;
+    }
+
+    public String getCurrentTitle() {
+        return currentTitle;
+    }
+
+    public void setCurrentTitle(String currentTitle) {
+        this.currentTitle = currentTitle;
+    }
 
     public String getPlayerId() {
         return playerId;

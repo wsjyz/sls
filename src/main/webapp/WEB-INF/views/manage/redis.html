@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="${request.contextPath}/images/favicon.png">
+
+    <title>SLS-redis</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="${request.contextPath}/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="${request.contextPath}/js/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+        }
+        #datalist{margin: 20px 40px 15px 40px;}
+        .btn-group{margin-left: 40px;}
+    </style>
+    <script type="application/javascript">
+            $.getJSON("${request.contextPath}/manage/get-hall-list", function(data) {
+                $("#halllist").html("");//清空info内容
+                $.each(data, function(i, item) {
+                    $("#halllist").append(
+                            "<tr>"+
+                            "<td>" + (i+1) + "</td>" +
+                            "<td>" + item.host + "</td>" +
+                            "<td>" + item.port + "</td>" +
+                            "<td>" + item.playerCounts + "</td>"+
+                            "<tr>"
+                    );
+                });
+            });
+
+    </script>
+</head>
+<body>
+<div class="btn-group">
+    <button type="button" class="btn btn-danger" data-toggle="dropdown">Action</button>
+    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li><a href="${request.contextPath}/manage/online">在线人数</a></li>
+        <li><a href="#">大厅信息</a></li>
+        <li><a href="#">房间信息</a></li>
+        <li><a href="${request.contextPath}/manage/delete">删除...</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+    </ul>
+</div>
+
+<div id="datalist" class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">大厅信息</div>
+
+    <!-- Table -->
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>地址</th>
+            <th>端口</th>
+            <th>人数</th>
+        </tr>
+        </thead>
+        <tbody id="halllist">
+        <tr>
+            <td>1</td>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

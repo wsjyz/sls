@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="${request.contextPath}/images/favicon.png">
+
+    <title>SLS-redis</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="${request.contextPath}/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+        }
+        #datalist{margin: 20px 40px 15px 40px;}
+    </style>
+    <script type="text/javascript" src="${request.contextPath}/js/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/Char.min.js"></script>
+    <title>在线人数</title>
+
+    <script type="application/javascript">
+        $(function(){
+            //Get context with jQuery - using jQuery's .get() method.
+            var ctx = $("#myChart").get(0).getContext("2d");
+            //This will get the first returned node in the jQuery collection.
+            var myNewChart = new Chart(ctx);
+            var lineChartData = {
+                labels : ["00:00","01.00","02.00","03.00","04.00","05.00","06.00","07.00","08.00","09.00","10.00","11.00","12.00"],
+                datasets : [
+                    {
+                        fillColor : "rgba(190,50,250,0.5)",
+                        strokeColor : "rgba(220,220,220,1)",
+                        pointColor : "rgba(220,220,220,1)",
+                        pointStrokeColor : "#fff",
+                        data : [65,59,90,81,56,55,40,65,59,90,81,56,55,40]
+                    },
+                    {
+                        fillColor : "rgba(100,157,105,0.5)",
+                        strokeColor : "rgba(151,187,205,1)",
+                        pointColor : "rgba(151,187,205,1)",
+                        pointStrokeColor : "#fff",
+                        data : [28,48,40,19,96,27,100,28,48,40,19,96,27,100]
+                    }
+                ]
+
+            }
+
+            myNewChart.Line(lineChartData);
+        })
+    </script>
+</head>
+<body>
+<div id="datalist" class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">在线人数</div>
+<canvas id="myChart" width="1269" height="400" style="padding: 20px;"></canvas>
+</div>
+</body>
+</html>

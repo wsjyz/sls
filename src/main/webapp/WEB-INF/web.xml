@@ -31,6 +31,7 @@
             <param-value>
                 classpath:datasource.xml
                 classpath:spring-config.xml
+                classpath:spring-redis.xml
                 classpath*:/dispatcher-*.xml
             </param-value>
         </init-param>

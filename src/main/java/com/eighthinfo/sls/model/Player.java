@@ -16,6 +16,10 @@ public class Player {
     private String playerName;
 
     private int male;
+    /**
+     * 排名
+     */
+    private int ranking;
 
     /**
      * 经验值
@@ -29,6 +33,14 @@ public class Player {
      *当前级别名称
      */
     private String currentTitle;
+
+    public int getRanking() {
+        return ranking;
+    }
+
+    public void setRanking(int ranking) {
+        this.ranking = ranking;
+    }
 
     public float getCurrentExperience() {
         return currentExperience;

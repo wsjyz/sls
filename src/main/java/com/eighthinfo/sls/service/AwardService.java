@@ -11,4 +11,6 @@ import java.util.List;
 public interface AwardService {
 
     List<Award> loadAwardListByLevel(int level);
+
+    boolean winAprize(String playerId,String awardId);
 }

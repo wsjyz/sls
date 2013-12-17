@@ -12,4 +12,10 @@ import java.util.List;
 public interface AwardDAO {
 
     List<Award> loadAwardListByLevel(int level);
+
+    /**
+     * 获取奖品的中奖率
+     * @return
+     */
+    String getAwardRateOfWin(String awardId);
 }

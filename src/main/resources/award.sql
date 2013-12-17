@@ -7,6 +7,6 @@ CREATE TABLE `t_award` (
   `detail_href` varchar(200) DEFAULT NULL COMMENT '详情介绍链接',
   `description` varchar(500) DEFAULT NULL,
   `price` int(8) DEFAULT NULL COMMENT '价值，元，省略角分单位',
-  `rate_of_win` double DEFAULT NULL COMMENT '中奖概率',
+  `rate_of_win` varchar(10) DEFAULT NULL COMMENT '中奖概率',
   PRIMARY KEY (`award_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

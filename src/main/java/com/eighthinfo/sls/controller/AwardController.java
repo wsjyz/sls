@@ -26,4 +26,10 @@ public class AwardController {
     public List<Award> getAwardList(@PathVariable int level){
         return awardService.loadAwardListByLevel(level);
     }
+
+    @ResponseBody
+    @RequestMapping(value = {"/win/{awardId}/{playerId}"})
+    public boolean getAwardList(@PathVariable String awardId,@PathVariable String playerId){
+        return awardService.winAprize(playerId,awardId);
+    }
 }

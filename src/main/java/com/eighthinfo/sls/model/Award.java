@@ -23,13 +23,13 @@ public class Award {
     /**
      * 中奖概率
      */
-    private Double rateOfWin;
+    private String rateOfWin;
 
-    public Double getRateOfWin() {
+    public String getRateOfWin() {
         return rateOfWin;
     }
 
-    public void setRateOfWin(Double rateOfWin) {
+    public void setRateOfWin(String rateOfWin) {
         this.rateOfWin = rateOfWin;
     }
 

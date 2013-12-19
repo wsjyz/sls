@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="${request.contextPath}/images/favicon.png">
+
+    <title>试题</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="${request.contextPath}/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="${request.contextPath}/js/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+        }
+        #uploadPanel {
+            margin-left: auto; margin-right: auto;max-width: 700px;margin-top: 200px;
+        }
+    </style>
+    <script type="application/javascript">
+
+    </script>
+</head>
+<body>
+
+<div class="panel panel-default" id="uploadPanel">
+    <div class="panel-heading">请上传excel模板</div>
+    <div class="panel-body" style="overflow: hidden;">
+        <form action="${request.contextPath}/manage/topic-upload" method="post"
+              enctype="multipart/form-data" target="resultiframe">
+        <div class="row" style="float: left;">
+            <div class="col-lg-6">
+                <div class="input-group">
+                      <span class="input-group-btn">
+                              <input type="file" name="file" class="btn btn-default"/>
+                      </span>
+                </div><!-- /input-group -->
+            </div><!-- /.col-lg-6 -->
+            <div class="col-lg-6">
+                    <input type="submit" value="上传"  class="btn btn-default"/>
+            </div>
+            <div class="col-lg-6">
+                <div class="alert alert-warning alert-dismissable" id="deletetip" >
+                    <iframe name="resultiframe" src="" ></iframe>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

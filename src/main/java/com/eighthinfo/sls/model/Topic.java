@@ -11,7 +11,16 @@ public class Topic {
     private String topicId;
     private String title;
     private int level;
+    private String tags;
     private List<TopicItem> options;
+
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 
     public List<TopicItem> getOptions() {
         return options;

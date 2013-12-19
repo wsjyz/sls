@@ -3,6 +3,7 @@ package com.eighthinfo.sls.service;
 import com.eighthinfo.sls.model.Topic;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: dam
@@ -12,4 +13,5 @@ public interface TopicService {
 
     List<Topic> loadRandomTopicList(int level, int limit);
 
+    public int importTopic(List<Map<String, String>> list);
 }

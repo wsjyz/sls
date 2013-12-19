@@ -5,10 +5,16 @@ import com.eighthinfo.sls.dao.TopicDAO;
 import com.eighthinfo.sls.model.Topic;
 import com.eighthinfo.sls.model.TopicItem;
 import com.eighthinfo.sls.utils.Group;
+import com.eighthinfo.sls.utils.UUIDGen;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.stereotype.Service;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -60,5 +66,31 @@ public class TopicDAOImpl extends BaseDAO implements TopicDAO {
         }
 
         return result;
+    }
+
+    public int saveBatch(final List<Topic> topics){
+        List<String> sqls = new ArrayList<String>();
+        for(Topic topic:topics){
+            String topicId = UUIDGen.genShortPK();
+            StringBuilder topSql = new StringBuilder("insert into ").append(TABLE_NAME)
+                    .append(" (topic_id,title,level,tags) values('")
+                    .append(topicId+"','").append(topic.getTitle()+"',")
+                    .append(topic.getLevel()+",'").append(topic.getTags()+"')");
+            System.out.println(topSql.toString());
+            sqls.add(topSql.toString());
+            for(TopicItem item:topic.getOptions()){
+                StringBuilder itemSql = new StringBuilder("insert into ").append(ITEM_TABLE_NAME)
+                        .append(" (item_id,topic_id,content,right_answer,order_num) values( '")
+                        .append( UUIDGen.genShortPK() +"','").append(topicId+"','")
+                        .append(item.getContent()+"',")
+                        .append(item.getRight()+",").append(item.getIndex()+")");
+                System.out.println(itemSql.toString());
+                sqls.add(itemSql.toString());
+            }
+
+        }
+
+        int[] results =  getJdbcTemplate().batchUpdate(sqls.toArray(new String[sqls.size()]));
+        return results.length;
     }
 }

@@ -29,7 +29,7 @@ public class AwardController {
 
     @ResponseBody
     @RequestMapping(value = {"/win/{awardId}/{playerId}"})
-    public boolean getAwardList(@PathVariable String awardId,@PathVariable String playerId){
+    public boolean winAprize(@PathVariable String awardId,@PathVariable String playerId){
         return awardService.winAprize(playerId,awardId);
     }
 }

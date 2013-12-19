@@ -12,4 +12,6 @@ import java.util.List;
 public interface TopicDAO {
 
     List<Topic> loadRandomTopicList(int level, int limit);
+
+    public int saveBatch(final List<Topic> topics);
 }

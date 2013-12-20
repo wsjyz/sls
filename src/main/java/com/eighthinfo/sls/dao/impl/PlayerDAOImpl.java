@@ -4,7 +4,12 @@ import com.eighthinfo.sls.dao.BaseDAO;
 import com.eighthinfo.sls.dao.PlayerDAO;
 import com.eighthinfo.sls.model.Player;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
 
 /**
  * User: dam
@@ -20,7 +25,22 @@ public class PlayerDAOImpl extends BaseDAO implements PlayerDAO {
 
     @Override
     public Player get(String userId) {
-        return getJdbcTemplate().queryForObject(SQL_QUERY, BeanPropertyRowMapper.newInstance(Player.class), userId);
+        List<Player> playerList = getJdbcTemplate().query(SQL_QUERY,new String[]{userId},new RowMapper<Player>() {
+            @Override
+            public Player mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Player player = new Player();
+                player.setPlayerId(rs.getString("player_id"));
+                player.setCurrentExperience(rs.getFloat("experience"));
+                player.setMale(rs.getInt("male"));
+                player.setPlayerName(rs.getString("player_name"));
+                return player;
+            }
+        });
+        Player player = new Player();
+        if(!playerList.isEmpty() && playerList.size()>0){
+            player = playerList.get(0);
+        }
+        return player;
     }
 
     @Override

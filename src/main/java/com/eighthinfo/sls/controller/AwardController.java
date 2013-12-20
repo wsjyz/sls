@@ -1,6 +1,7 @@
 package com.eighthinfo.sls.controller;
 
 import com.eighthinfo.sls.model.Award;
+import com.eighthinfo.sls.model.UserPrize;
 import com.eighthinfo.sls.service.AwardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,5 +32,11 @@ public class AwardController {
     @RequestMapping(value = {"/win/{awardId}/{playerId}"})
     public boolean winAprize(@PathVariable String awardId,@PathVariable String playerId){
         return awardService.winAprize(playerId,awardId);
+    }
+
+    @ResponseBody
+    @RequestMapping(value = {"/get-player-prize-list"})
+    public List<UserPrize> getPlayerPrizeList(){
+        return awardService.getPlayerPrizeList();
     }
 }

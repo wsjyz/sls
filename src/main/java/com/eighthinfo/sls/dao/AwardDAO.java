@@ -1,6 +1,7 @@
 package com.eighthinfo.sls.dao;
 
 import com.eighthinfo.sls.model.Award;
+import com.eighthinfo.sls.model.PlayerWinPrize;
 
 import java.util.List;
 
@@ -18,4 +19,10 @@ public interface AwardDAO {
      * @return
      */
     String getAwardRateOfWin(String awardId);
+
+    Award getAward(String awardId);
+
+    void savePlayerWinPrize(PlayerWinPrize playerWinPrize);
+
+    int getPlayerPrizeTotalPrice(String playerId);
 }

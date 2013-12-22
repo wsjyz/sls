@@ -4,6 +4,7 @@ import com.eighthinfo.sls.dao.AwardDAO;
 import com.eighthinfo.sls.dao.BaseDAO;
 import com.eighthinfo.sls.model.Award;
 import com.eighthinfo.sls.model.PlayerWinPrize;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
@@ -98,5 +99,51 @@ public class AwardDAOImpl extends BaseDAO implements AwardDAO {
                 .append(" group by player_id");
 
         return getJdbcTemplate().queryForInt(sql.toString());
+    }
+
+    @Override
+    public void saveAward(Award award) {
+        StringBuilder sql = new StringBuilder("");
+        if(StringUtils.isBlank(award.getAwardId())){
+            sql.append("insert into ")
+               .append(TABLE_NAME).append(" values(award_id,award_name,bg_href,remain,total,detail_href")
+               .append(" description,price,level,rate_of_win) values(?,?,?,?,?,?,?,?,?,?)");
+        }else{
+            sql.append("update ").append(TABLE_NAME).append(" set ");
+            if(StringUtils.isNotBlank(award.getAwardName())){
+                sql.append(" award_name='"+award.getAwardName()+"',");
+            }
+            if(StringUtils.isNotBlank(award.getBgHref())){
+                sql.append("bg_href='"+award.getBgHref()+"',");
+            }
+            if(award.getRemain() != 0){
+                sql.append("remain="+award.getRemain()+",");
+            }
+            if(award.getTotal() != 0){
+                sql.append("total="+award.getTotal()+",");
+            }
+            if(StringUtils.isNotBlank(award.getDetailHref())){
+                sql.append("detail_href='"+award.getDetailHref()+"',");
+            }
+            if(StringUtils.isNotBlank(award.getDescription())){
+                sql.append("description='"+award.getDescription()+"',");
+            }
+            if(award.getPrice() != 0){
+                sql.append("price="+award.getPrice()+",");
+            }
+            if(award.getLevel() != 0){
+                sql.append("level="+award.getLevel()+",");
+            }
+            if(StringUtils.isNotBlank(award.getRateOfWin())){
+                sql.append("rate_of_win='"+award.getRateOfWin()+"',");
+            }
+            if(sql.lastIndexOf(",") + 1 == sql.length()){
+                sql.delete(sql.lastIndexOf(","),sql.length());
+            }
+            sql.append(" where award_id='"+award.getAwardId()+"'");
+            getJdbcTemplate().update(sql.toString());
+        }
+
+
     }
 }

@@ -1,6 +1,7 @@
 package com.eighthinfo.sls.service.impl;
 
 import com.eighthinfo.sls.model.Hall;
+import com.eighthinfo.sls.model.Room;
 import com.eighthinfo.sls.service.HallService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -60,5 +61,12 @@ public class HallServiceImpl implements HallService {
 
         }
         return hallList;
+    }
+
+    public List<Room> getRoomList(){
+        List<Room> roomList = new ArrayList<Room>();
+
+        //Set<ZSetOperations.TypedTuple<String>> hallSet = redisTemplate.boundZSetOps("hallSet").rangeWithScores(0,-1);
+        return roomList;
     }
 }

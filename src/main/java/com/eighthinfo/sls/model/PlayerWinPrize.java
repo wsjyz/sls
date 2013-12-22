@@ -17,6 +17,15 @@ public class PlayerWinPrize extends AbstractModel {
 
     private String optTime;
 
+    private String awardName;
+
+    public String getAwardName() {
+        return awardName;
+    }
+
+    public void setAwardName(String awardName) {
+        this.awardName = awardName;
+    }
 
     public String getPlayerWinPrizeId() {
         return playerWinPrizeId;

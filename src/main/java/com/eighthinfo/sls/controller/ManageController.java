@@ -1,6 +1,7 @@
 package com.eighthinfo.sls.controller;
 
 import com.eighthinfo.sls.model.Hall;
+import com.eighthinfo.sls.model.Room;
 import com.eighthinfo.sls.service.HallService;
 import com.eighthinfo.sls.service.TopicService;
 import com.eighthinfo.sls.utils.ExcelReader;
@@ -39,6 +40,12 @@ public class ManageController {
     public List<Hall> get() {
         List<Hall> hallList = hallService.getHallList();
         return hallList;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/get-room-list", method = RequestMethod.GET)
+    public List<Room> getRoomList() {
+        List<Room> roomList = hallService.getRoomList();
+        return roomList;
     }
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete() {

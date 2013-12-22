@@ -1,6 +1,7 @@
 package com.eighthinfo.sls.service;
 
 import com.eighthinfo.sls.model.Hall;
+import com.eighthinfo.sls.model.Room;
 
 import java.util.List;
 
@@ -20,4 +21,6 @@ public interface HallService {
      * @return
      */
     List<Hall> getHallList();
+
+    public List<Room> getRoomList();
 }

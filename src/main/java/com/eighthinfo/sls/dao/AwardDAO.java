@@ -25,4 +25,7 @@ public interface AwardDAO {
     void savePlayerWinPrize(PlayerWinPrize playerWinPrize);
 
     int getPlayerPrizeTotalPrice(String playerId);
+
+    void saveAward(Award award);
+
 }

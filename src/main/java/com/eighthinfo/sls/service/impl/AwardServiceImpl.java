@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * User: dam
@@ -59,6 +60,7 @@ public class AwardServiceImpl implements AwardService {
             playerWinPrize.setPlayerId(playerId);
             Award award = awardDAO.getAward(awardId);
             playerWinPrize.setPrice(award.getPrice());
+            playerWinPrize.setAwardName(award.getAwardName());
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String currentTime = sdf.format(new Date());
             playerWinPrize.setOptTime(currentTime);
@@ -68,8 +70,10 @@ public class AwardServiceImpl implements AwardService {
             //得到玩家的总奖金
             int price = awardDAO.getPlayerPrizeTotalPrice(playerId);
             //更新排行榜
-            System.out.println(player.getPlayerName()+"---");
             redisTemplate.boundZSetOps("userWinPrizeList").add(player.getPlayerName(),price);
+            AtomicInteger remain = new AtomicInteger(award.getRemain());
+            award.setRemain(remain.decrementAndGet());
+            awardDAO.saveAward(award);
             win = true;
         }
         return win;

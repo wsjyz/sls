@@ -17,6 +17,18 @@ public class Player {
 
     private int male;
     /**
+     * 真实姓名
+     */
+    private String peopleName;
+
+    private String qq;
+
+    private String phone;
+
+    private String email;
+
+    private String address;
+    /**
      * 排名
      */
     private int ranking;
@@ -33,6 +45,46 @@ public class Player {
      *当前级别名称
      */
     private String currentTitle;
+
+    public String getPeopleName() {
+        return peopleName;
+    }
+
+    public void setPeopleName(String peopleName) {
+        this.peopleName = peopleName;
+    }
+
+    public String getQq() {
+        return qq;
+    }
+
+    public void setQq(String qq) {
+        this.qq = qq;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
 
     public int getRanking() {
         return ranking;

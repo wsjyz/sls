@@ -19,7 +19,7 @@ public interface AwardService {
      *获取排行榜
      * @return
      */
-    public List<UserPrize> getPlayerPrizeList();
+    public List<UserPrize> getPlayerPrizeList(int count);
     /**
      * 查询玩家获得的奖品
      * @param playerId

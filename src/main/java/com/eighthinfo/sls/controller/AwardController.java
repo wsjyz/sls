@@ -39,9 +39,9 @@ public class AwardController {
      * @return
      */
     @ResponseBody
-    @RequestMapping(value = {"/get-ranking-list"})
-    public List<UserPrize> getPlayerPrizeList(){
-        return awardService.getPlayerPrizeList();
+    @RequestMapping(value = {"/get-ranking-list/{counts}"})
+    public List<UserPrize> getPlayerPrizeList(@PathVariable int counts){
+        return awardService.getPlayerPrizeList(counts);
     }
 
     /**

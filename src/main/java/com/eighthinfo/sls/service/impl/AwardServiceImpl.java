@@ -78,9 +78,9 @@ public class AwardServiceImpl implements AwardService {
         return win;
     }
 
-    public List<UserPrize> getPlayerPrizeList(){
+    public List<UserPrize> getPlayerPrizeList(int count){
         List<UserPrize> prizeList = new ArrayList<UserPrize>();
-        Set<ZSetOperations.TypedTuple<String>> set = redisTemplate.boundZSetOps("userWinPrizeList").reverseRangeWithScores(0, 5);
+        Set<ZSetOperations.TypedTuple<String>> set = redisTemplate.boundZSetOps("userWinPrizeList").reverseRangeWithScores(0, count);
         Iterator<ZSetOperations.TypedTuple<String>> itor = set.iterator();
         while(itor.hasNext()){
             ZSetOperations.TypedTuple<String> typedTuple = itor.next();

@@ -34,9 +34,25 @@ public class AwardController {
         return awardService.winAprize(playerId,awardId);
     }
 
+    /**
+     *
+     * @return
+     */
     @ResponseBody
-    @RequestMapping(value = {"/get-player-prize-list"})
+    @RequestMapping(value = {"/get-ranking-list"})
     public List<UserPrize> getPlayerPrizeList(){
         return awardService.getPlayerPrizeList();
+    }
+
+    /**
+     *
+     * @param playerId
+     * @param counts
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = {"/get-player-prize-list/{playerId}/{counts}"})
+    public List<Award> getPlayerPrizePrice(@PathVariable String playerId, @PathVariable int counts){
+        return awardService.getPlayerPrizePrice(playerId,counts);
     }
 }

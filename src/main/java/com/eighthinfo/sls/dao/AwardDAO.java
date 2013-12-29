@@ -28,4 +28,12 @@ public interface AwardDAO {
 
     void saveAward(Award award);
 
+    /**
+     * 查询玩家获得的奖品
+     * @param playerId
+     * @param counts :指定显示的数量
+     * @return
+     */
+    List<Award> getPlayerPrizePrice(String playerId,int counts);
+
 }

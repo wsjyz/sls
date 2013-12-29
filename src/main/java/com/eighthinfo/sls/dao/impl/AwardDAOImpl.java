@@ -13,6 +13,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -145,5 +146,27 @@ public class AwardDAOImpl extends BaseDAO implements AwardDAO {
         }
 
 
+    }
+
+    @Override
+    public List<Award> getPlayerPrizePrice(String playerId, int counts) {
+        List<Award> awardList = new ArrayList<Award>();
+        StringBuilder sql = new StringBuilder("select pwr.player_win_prize_id,a.award_name,a.bg_href,detail_href,a.price from ")
+                .append(PLAYER_WIN_PRIZE_TABLE_NAME).append(" pwr,").append(TABLE_NAME).append(" a")
+                .append(" where pwr.player_id = ? order by pwr.opt_time desc limit 0,")
+                .append("?");
+        awardList = getJdbcTemplate().query(sql.toString(),new Object[]{playerId,counts},new RowMapper<Award>() {
+            @Override
+            public Award mapRow(ResultSet rs, int rowNum) throws SQLException {
+                Award a = new Award();
+                a.setAwardName(rs.getString("award_name"));
+                a.setBgHref(rs.getString("bg_href"));
+                a.setDetailHref(rs.getString("detail_href"));
+                a.setPrice(rs.getLong("price"));
+                a.setPlayerWinPrizeId(rs.getString("player_win_prize_id"));
+                return a;
+            }
+        });
+        return awardList;
     }
 }

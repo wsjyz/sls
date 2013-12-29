@@ -24,6 +24,18 @@ public class Award {
      * 中奖概率
      */
     private String rateOfWin;
+    /**
+     *获奖码，用来传输，不存数据库
+     */
+    private String playerWinPrizeId;
+
+    public String getPlayerWinPrizeId() {
+        return playerWinPrizeId;
+    }
+
+    public void setPlayerWinPrizeId(String playerWinPrizeId) {
+        this.playerWinPrizeId = playerWinPrizeId;
+    }
 
     public String getRateOfWin() {
         return rateOfWin;

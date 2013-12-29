@@ -48,7 +48,6 @@ public class AwardServiceImpl implements AwardService {
         Lottery lottery = new Lottery();
         Map<String,Integer> map = StringUtil.getWeightMap(awardId,rate);
         for(Map.Entry<String,Integer> entry: map.entrySet()){
-            System.out.println(entry.getKey()+"--"+entry.getValue());
             lottery.addAward(entry.getKey(), entry.getValue());
         }
         String winAward = lottery.getAward();
@@ -91,5 +90,10 @@ public class AwardServiceImpl implements AwardService {
             prizeList.add(userPrize);
         }
         return prizeList;
+    }
+
+    @Override
+    public List<Award> getPlayerPrizePrice(String playerId, int counts) {
+        return awardDAO.getPlayerPrizePrice(playerId,counts);
     }
 }

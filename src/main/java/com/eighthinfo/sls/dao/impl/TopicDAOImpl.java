@@ -33,7 +33,7 @@ public class TopicDAOImpl extends BaseDAO implements TopicDAO {
         StringBuilder sql = new StringBuilder("SELECT * FROM ");
         sql.append(TABLE_NAME).append(" WHERE topic_id IN ");
         //improve performance
-        sql.append("(SELECT topic_id FROM ").append(TABLE_NAME).append(" WHERE level = ? ORDER BY RAND() LIMIT ?)");
+        sql.append("(SELECT topic_id FROM ").append(TABLE_NAME).append(" WHERE level = ? ORDER BY RAND()) LIMIT ?");
 
         List<Topic> result = getJdbcTemplate().queryForList(sql.toString(), Topic.class, level, limit);
         if (CollectionUtils.isNotEmpty(result)) {

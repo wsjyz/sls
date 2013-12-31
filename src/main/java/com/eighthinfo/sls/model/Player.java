@@ -13,7 +13,7 @@ public class Player {
 
     private String playerId;
 
-    private String playerName;
+    private String nickName;
 
     private int male;
     /**
@@ -118,12 +118,12 @@ public class Player {
         this.playerId = playerId;
     }
 
-    public String getPlayerName() {
-        return playerName;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setPlayerName(String playerName) {
-        this.playerName = playerName;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public int getMale() {
@@ -146,7 +146,7 @@ public class Player {
         Player player = new Player();
         player.setPlayerId(playerId);
         player.setMale(1);
-        player.setPlayerName(ChineseNameGenerator.getChinaName());
+        player.setNickName(ChineseNameGenerator.getChinaName());
         return player;
     }
 }

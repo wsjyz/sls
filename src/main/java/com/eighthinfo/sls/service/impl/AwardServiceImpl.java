@@ -69,7 +69,7 @@ public class AwardServiceImpl implements AwardService {
             //得到玩家的总奖金
             int price = awardDAO.getPlayerPrizeTotalPrice(playerId);
             //更新排行榜
-            redisTemplate.boundZSetOps("userWinPrizeList").add(player.getPlayerName(),price);
+            redisTemplate.boundZSetOps("userWinPrizeList").add(player.getNickName(),price);
             AtomicInteger remain = new AtomicInteger(award.getRemain());
             award.setRemain(remain.decrementAndGet());
             awardDAO.saveAward(award);

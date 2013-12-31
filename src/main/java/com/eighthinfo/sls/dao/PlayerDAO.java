@@ -12,5 +12,4 @@ public interface PlayerDAO {
 
     Player get(String userId);
 
-    Player getByName(String userName);
 }

@@ -5,7 +5,6 @@ import com.eighthinfo.sls.dao.BaseDAO;
 import com.eighthinfo.sls.model.Award;
 import com.eighthinfo.sls.model.PlayerWinPrize;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
@@ -35,7 +34,7 @@ public class AwardDAOImpl extends BaseDAO implements AwardDAO {
         sql.append(" WHERE level = ? ");
         sql.append(" ORDER BY remain ");
 
-        return getJdbcTemplate().queryForList(sql.toString(), Award.class, level);
+        return getJdbcTemplate().query(sql.toString(), new AwardAllRowMapper(), level);
     }
 
     public String getAwardRateOfWin(String awardId){
@@ -49,23 +48,7 @@ public class AwardDAOImpl extends BaseDAO implements AwardDAO {
     public Award getAward(String awardId) {
         StringBuilder sql = new StringBuilder("select * from ")
                 .append(TABLE_NAME).append(" where award_id=?");
-        List<Award> awardList = getJdbcTemplate().query(sql.toString(),new String[]{awardId},new RowMapper<Award>() {
-            @Override
-            public Award mapRow(ResultSet rs, int rowNum) throws SQLException {
-                Award award = new Award();
-                award.setAwardId(rs.getString("award_id"));
-                award.setAwardName(rs.getString("award_name"));
-                award.setBgHref(rs.getString("bg_href"));
-                award.setDescription(rs.getString("description"));
-                award.setDetailHref(rs.getString("detail_href"));
-                //award.setLevel(rs.getInt("level"));
-                award.setRateOfWin(rs.getString("rate_of_win"));
-                award.setRemain(rs.getInt("remain"));
-                award.setTotal(rs.getInt("total"));
-                award.setPrice(rs.getLong("price"));
-                return award;
-            }
-        });
+        List<Award> awardList = getJdbcTemplate().query(sql.toString(),new AwardAllRowMapper(),awardId);
         Award award = new Award();
         if(!awardList.isEmpty()&&awardList.size() > 0){
             award = awardList.get(0);
@@ -146,6 +129,25 @@ public class AwardDAOImpl extends BaseDAO implements AwardDAO {
         }
 
 
+    }
+
+    private class AwardAllRowMapper implements RowMapper<Award>{
+        @Override
+        public Award mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Award award = new Award();
+
+            award.setAwardId(rs.getString("award_id"));
+            award.setAwardName(rs.getString("award_name"));
+            award.setBgHref(rs.getString("bg_href"));
+            award.setRemain(rs.getInt("remain"));
+            award.setTotal(rs.getInt("total"));
+            award.setDetailHref(rs.getString("detail_href"));
+            award.setDescription(rs.getString("description"));
+            award.setPrice(rs.getLong("price"));
+            award.setLevel(rs.getInt("level"));
+            award.setRateOfWin(rs.getString("rate_of_win"));
+            return award;
+        }
     }
 
     @Override

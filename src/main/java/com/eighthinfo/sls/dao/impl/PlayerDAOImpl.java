@@ -36,7 +36,7 @@ public class PlayerDAOImpl extends BaseDAO implements PlayerDAO {
                 return player;
             }
         });
-        Player player = new Player();
+        Player player = null;
         if(!playerList.isEmpty() && playerList.size()>0){
             player = playerList.get(0);
         }

@@ -28,23 +28,25 @@ public class PlayerServiceImpl implements PlayerService {
     public Player getById(String playerId) {
         if(StringUtils.isNotBlank(playerId)){
             Player player = playerDAO.get(playerId);
-            Long experience = player.getExperience();
-            List<PlayerLevelSetting> levelList = playerLevelSettingDAO.getUserLevelSetting();
-            Iterator<PlayerLevelSetting> iter = levelList.iterator();
-            PlayerLevelSetting previousSetting = null;
-            while(iter.hasNext()){
-                PlayerLevelSetting setting = iter.next();
-                if(experience >= setting.getNeedExp()){
-                    player.setCurrentTitle(setting.getLevelTitle());
-                    if(previousSetting != null){
-                        float currentExperience = experience.floatValue()/previousSetting.getNeedExp();
-                        player.setCurrentExperience(currentExperience);
+            if(player != null){
+                Long experience = player.getExperience();
+                List<PlayerLevelSetting> levelList = playerLevelSettingDAO.getUserLevelSetting();
+                Iterator<PlayerLevelSetting> iter = levelList.iterator();
+                PlayerLevelSetting previousSetting = null;
+                while(iter.hasNext()){
+                    PlayerLevelSetting setting = iter.next();
+                    if(experience >= setting.getNeedExp()){
+                        player.setCurrentTitle(setting.getLevelTitle());
+                        if(previousSetting != null){
+                            float currentExperience = experience.floatValue()/previousSetting.getNeedExp();
+                            player.setCurrentExperience(currentExperience);
+                        }else{
+                            player.setCurrentExperience(100);
+                        }
+                        break;
                     }else{
-                        player.setCurrentExperience(100);
+                        previousSetting = setting;
                     }
-                    break;
-                }else{
-                    previousSetting = setting;
                 }
             }
 

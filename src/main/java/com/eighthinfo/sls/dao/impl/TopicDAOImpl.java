@@ -9,9 +9,11 @@ import com.eighthinfo.sls.utils.UUIDGen;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,18 +37,18 @@ public class TopicDAOImpl extends BaseDAO implements TopicDAO {
         //improve performance
         sql.append("(SELECT topic_id FROM ").append(TABLE_NAME).append(" WHERE level = ? ORDER BY RAND()) LIMIT ?");
 
-        List<Topic> result = getJdbcTemplate().queryForList(sql.toString(), Topic.class, level, limit);
+        List<Topic> result = getJdbcTemplate().query(sql.toString(), new TopicAllRowMapper(), level, limit);
         if (CollectionUtils.isNotEmpty(result)) {
             StringBuilder topicIds = new StringBuilder();
             for (Topic topic : result) {
-                topicIds.append(topic.getTopicId()).append(",");
+                topicIds.append("'").append(topic.getTopicId()).append("',");
             }
             String topicIdArgs = topicIds.substring(0, topicIds.length() - 1);
 
             StringBuilder itemQuery = new StringBuilder("SELECT * FROM ");
             itemQuery.append(ITEM_TABLE_NAME).append(" WHERE topic_id in (?) ");
 
-            List<TopicItem> itemList = getJdbcTemplate().queryForList(itemQuery.toString(), TopicItem.class, topicIdArgs);
+            List<TopicItem> itemList = getJdbcTemplate().query(itemQuery.toString(),new TopicItemAllRowMapper(),topicIdArgs);
             //group by topicId
             Group<TopicItem> itemGroup = new Group<TopicItem>();
             Map<String, List<TopicItem>> groupResult = itemGroup.groupCollection(itemList, new Group.KeyBuilder<TopicItem>() {
@@ -66,6 +68,31 @@ public class TopicDAOImpl extends BaseDAO implements TopicDAO {
         }
 
         return result;
+    }
+
+    private class TopicAllRowMapper implements RowMapper<Topic> {
+        @Override
+        public Topic mapRow(ResultSet rs, int rowNum) throws SQLException {
+            Topic result = new Topic();
+            result.setTopicId(rs.getString("topic_id"));
+            result.setTitle(rs.getString("title"));
+            result.setLevel(rs.getInt("level"));
+            result.setTags(rs.getString("tags"));
+            return result;
+        }
+    }
+
+    private class TopicItemAllRowMapper implements RowMapper<TopicItem>{
+        @Override
+        public TopicItem mapRow(ResultSet rs, int rowNum) throws SQLException {
+            TopicItem item = new TopicItem();
+            item.setItemId(rs.getString("item_id"));
+            item.setTopicId(rs.getString("topic_id"));
+            item.setContent(rs.getString("content"));
+            item.setRight(rs.getInt("right_answer"));
+            item.setIndex(rs.getInt("order_num"));
+            return item;
+        }
     }
 
     public int saveBatch(final List<Topic> topics){

@@ -35,12 +35,26 @@ public class PlayerServiceImpl implements PlayerService {
                 PlayerLevelSetting previousSetting = null;
                 while(iter.hasNext()){
                     PlayerLevelSetting setting = iter.next();
-                    if(experience >= setting.getNeedExp()){
+                    if(experience > setting.getNeedExp()){
                         player.setCurrentTitle(setting.getLevelTitle());
                         if(previousSetting != null){
-                            float currentExperience = experience.floatValue()/previousSetting.getNeedExp();
-                            player.setCurrentExperience(currentExperience);
+                            player.setCurrentExperience((experience.floatValue() - setting.getNeedExp())
+                                    /(previousSetting.getNeedExp() - setting.getNeedExp()) *100);
                         }else{
+                            if(experience >= setting.getNeedExp()){
+                                player.setCurrentExperience(100);
+                            }else{
+                                player.setCurrentExperience(experience.floatValue()/setting.getNeedExp() *100);
+                            }
+
+                        }
+                        break;
+                    }else if(experience == setting.getNeedExp()){
+                        if(previousSetting != null){
+                            player.setCurrentTitle(setting.getLevelTitle());
+                            player.setCurrentExperience(0);
+                        }else{
+                            player.setCurrentTitle(setting.getLevelTitle());
                             player.setCurrentExperience(100);
                         }
                         break;

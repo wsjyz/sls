@@ -29,7 +29,7 @@ public class PlayerDAOImpl extends BaseDAO implements PlayerDAO {
             public Player mapRow(ResultSet rs, int rowNum) throws SQLException {
                 Player player = new Player();
                 player.setPlayerId(rs.getString("player_id"));
-                player.setCurrentExperience(rs.getFloat("experience"));
+                player.setExperience(rs.getLong("experience"));
                 player.setMale(rs.getInt("male"));
                 player.setNickName(rs.getString("player_name"));
                 return player;

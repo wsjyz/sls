@@ -30,32 +30,35 @@ public class PlayerServiceImpl implements PlayerService {
             Player player = playerDAO.get(playerId);
             if(player != null){
                 Long experience = player.getExperience();
-                List<PlayerLevelSetting> levelList = playerLevelSettingDAO.getUserLevelSetting();
+                List<PlayerLevelSetting> levelList = playerLevelSettingDAO.getUserLevelSetting(); //倒序
                 Iterator<PlayerLevelSetting> iter = levelList.iterator();
                 PlayerLevelSetting previousSetting = null;
                 while(iter.hasNext()){
                     PlayerLevelSetting setting = iter.next();
-                    if(experience > setting.getNeedExp()){
+                    if(experience > setting.getNeedExp()){ //反向查找的
                         player.setCurrentTitle(setting.getLevelTitle());
                         if(previousSetting != null){
-                            player.setCurrentExperience((experience.floatValue() - setting.getNeedExp())
-                                    /(previousSetting.getNeedExp() - setting.getNeedExp()) *100);
+                            player.setCurrentExpRate((experience.floatValue() - setting.getNeedExp())
+                                    / (previousSetting.getNeedExp() - setting.getNeedExp()) * 100);
+                            player.setNextExp(previousSetting.getNeedExp());
                         }else{
-                            if(experience >= setting.getNeedExp()){
-                                player.setCurrentExperience(100);
-                            }else{
-                                player.setCurrentExperience(experience.floatValue()/setting.getNeedExp() *100);
+                            if(experience >= setting.getNeedExp()){ //如果超过或等于最大级别
+                                player.setCurrentExpRate(100);
+                            }else{//如果小于最大级别
+                                player.setCurrentExpRate(experience.floatValue() / setting.getNeedExp() * 100);
                             }
-
+                            player.setNextExp(setting.getNeedExp());
                         }
                         break;
                     }else if(experience == setting.getNeedExp()){
                         if(previousSetting != null){
                             player.setCurrentTitle(setting.getLevelTitle());
-                            player.setCurrentExperience(0);
+                            player.setCurrentExpRate(0);
+                            player.setNextExp(previousSetting.getNeedExp());
                         }else{
                             player.setCurrentTitle(setting.getLevelTitle());
-                            player.setCurrentExperience(100);
+                            player.setCurrentExpRate(100);
+                            player.setNextExp(setting.getNeedExp());
                         }
                         break;
                     }else{

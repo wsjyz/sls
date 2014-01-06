@@ -40,11 +40,23 @@ public class Player {
     /**
      *当前进度百分比
      */
-    private float currentExperience;
+    private float currentExpRate;
     /**
      *当前级别名称
      */
     private String currentTitle;
+    /**
+     *下一等级需要经验值
+     */
+    private long nextExp;
+
+    public long getNextExp() {
+        return nextExp;
+    }
+
+    public void setNextExp(long nextExp) {
+        this.nextExp = nextExp;
+    }
 
     public String getPeopleName() {
         return peopleName;
@@ -94,12 +106,12 @@ public class Player {
         this.ranking = ranking;
     }
 
-    public float getCurrentExperience() {
-        return currentExperience;
+    public float getCurrentExpRate() {
+        return currentExpRate;
     }
 
-    public void setCurrentExperience(float currentExperience) {
-        this.currentExperience = currentExperience;
+    public void setCurrentExpRate(float currentExpRate) {
+        this.currentExpRate = currentExpRate;
     }
 
     public String getCurrentTitle() {

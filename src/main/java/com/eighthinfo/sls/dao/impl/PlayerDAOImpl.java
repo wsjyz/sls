@@ -50,4 +50,10 @@ public class PlayerDAOImpl extends BaseDAO implements PlayerDAO {
         }
     }
 
+    public int updateExp(String playerId,long exp){
+        StringBuilder sql = new StringBuilder("update t_player set experience = experience +"+exp)
+                .append(" where player_id = ?");
+        return getJdbcTemplate().update(sql.toString(),playerId);
+    }
+
 }

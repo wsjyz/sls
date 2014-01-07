@@ -77,4 +77,9 @@ public class PlayerServiceImpl implements PlayerService {
     public void save(Player player) {
         playerDAO.save(player);
     }
+
+    @Override
+    public int updateExp(String playerId, long exp) {
+        return playerDAO.updateExp(playerId,exp);
+    }
 }

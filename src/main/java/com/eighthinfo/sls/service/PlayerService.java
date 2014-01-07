@@ -19,4 +19,10 @@ public interface PlayerService {
 
     void save(Player player);
 
+    /**
+     *更新用户经验值
+     * @param playerId
+     * @param exp
+     */
+    int updateExp(String playerId,long exp);
 }

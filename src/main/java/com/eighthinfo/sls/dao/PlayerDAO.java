@@ -12,4 +12,10 @@ public interface PlayerDAO {
 
     Player get(String userId);
 
+    /**
+     *更新用户经验值
+     * @param playerId
+     * @param exp
+     */
+    int updateExp(String playerId,long exp);
 }

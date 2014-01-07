@@ -55,6 +55,11 @@ public class PlayerController {
     public String randomName() {
         return ChineseNameGenerator.getChinaName();
     }
+    @ResponseBody
+    @RequestMapping(value = {"/update-exp/{playerId}/{exp}"})
+    public int updatePlayerExp(@PathVariable String playerId,@PathVariable long exp){
 
+       return playerService.updateExp(playerId,exp);
+    }
 
 }

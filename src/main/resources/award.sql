@@ -8,5 +8,6 @@ CREATE TABLE `t_award` (
   `description` varchar(500) DEFAULT NULL,
   `price` int(8) DEFAULT NULL COMMENT '价值，元，省略角分单位',
   `rate_of_win` varchar(10) DEFAULT NULL COMMENT '中奖概率',
+  `level` int(2) DEFAULT NULL COMMENT '对应的级别',
   PRIMARY KEY (`award_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

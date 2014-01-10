@@ -46,9 +46,9 @@ public class TopicDAOImpl extends BaseDAO implements TopicDAO {
             String topicIdArgs = topicIds.substring(0, topicIds.length() - 1);
 
             StringBuilder itemQuery = new StringBuilder("SELECT * FROM ");
-            itemQuery.append(ITEM_TABLE_NAME).append(" WHERE topic_id in (?) ");
+            itemQuery.append(ITEM_TABLE_NAME).append(" WHERE topic_id in (").append(topicIdArgs).append(")");
 
-            List<TopicItem> itemList = getJdbcTemplate().query(itemQuery.toString(),new TopicItemAllRowMapper(),topicIdArgs);
+            List<TopicItem> itemList = getJdbcTemplate().query(itemQuery.toString(),new TopicItemAllRowMapper());
             //group by topicId
             Group<TopicItem> itemGroup = new Group<TopicItem>();
             Map<String, List<TopicItem>> groupResult = itemGroup.groupCollection(itemList, new Group.KeyBuilder<TopicItem>() {

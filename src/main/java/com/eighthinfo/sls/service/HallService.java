@@ -2,6 +2,7 @@ package com.eighthinfo.sls.service;
 
 import com.eighthinfo.sls.model.Hall;
 import com.eighthinfo.sls.model.Room;
+import com.eighthinfo.sls.model.RoomPlayer;
 
 import java.util.List;
 
@@ -21,6 +22,19 @@ public interface HallService {
      * @return
      */
     List<Hall> getHallList();
+    /**
+     * manage
+     * 返回某个awardId下的所有房间排名信息
+     * @param awardId
+     * @return
+     */
+    List<Room> getRoomList(String awardId);
 
-    public List<Room> getRoomList();
+    /**
+     * manage
+     * 返回roomId下的玩家信息
+     * @param roomId
+     * @return
+     */
+    List<RoomPlayer> findRoomById(String roomId);
 }

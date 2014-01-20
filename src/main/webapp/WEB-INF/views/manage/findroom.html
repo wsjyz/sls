@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="${request.contextPath}/images/favicon.png">
+
+    <title>房间信息</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="${request.contextPath}/css/bootstrap.css" rel="stylesheet">
+    <script type="text/javascript" src="${request.contextPath}/js/jquery-2.0.0.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/tooltip.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/js/popover.js"></script>
+    <style type="text/css">
+        body {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #eee;
+        }
+        #deletePanel {
+            margin-left: auto; margin-right: auto;max-width: 700px;margin-top: 50px;
+        }
+        #datalist{margin: 20px 40px 15px 40px;}
+    </style>
+    <script type="application/javascript">
+
+                $(document).ready(function(){
+                    alert("a");
+                    $('*[data-poload]').bind('hover',function() {
+                        alert("b");
+                        var e=$(this);
+                        e.unbind('hover');
+                        $.get(e.data('poload'),function(d) {
+                            e.popover({content: d}).popover('show');
+                        });
+                    });
+
+                });
+        $(function(){
+            $('#searchbutton').click(function (e) {
+                var awardId = $('#awardId').val();
+                $.getJSON("${request.contextPath}/manage/find-rooms-by-award/"+awardId, function(data) {
+                    $("#roomList").html("");//清空info内容
+                    $.each(data, function(i, item) {
+                        $("#roomList").append(
+                                "<tr>"+
+                                        "<td>" + (i+1) + "</td>" +
+                                        "<td>" + item.roomId + "</td>" +
+                                        "<td>" + item.playerCount + "</td>"+
+                                        "<td><a href=\"#\"" +
+                                        "data-toggle=\"popover\" title " +
+                                        "role=\"button\" data-original-title=\"A Title\" " +
+                                        "data-poload=\"${request.contextPath}/manage/find-room-by-id/"+item.roomId+"\""+
+                                        "class=\"btn btn-lg btn-danger\" id=\""+item.roomId+"\">查看</a></td>"+
+                                "<tr>"
+                        );
+                    });
+                });
+
+            });
+
+
+
+
+        })
+
+    </script>
+</head>
+<body>
+    <a href="#" class="btn btn-lg btn-danger" data-toggle="popover" title="A Title"  data-poload="${request.contextPath}/manage/find-room-by-id"
+       data-content="And here's some amazing content. It's very engaging. right?" id="tetpop" >Click to toggle popover</a>
+
+<div class="panel panel-default" id="deletePanel">
+    <div class="panel-heading">请输入awardId</div>
+    <div class="panel-body" style="overflow: hidden;">
+        <div class="row" style="float: left;">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="awardId">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" id="searchbutton">Go!</button>
+                      </span>
+                </div><!-- /input-group -->
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="datalist" class="panel panel-default">
+    <!-- Default panel contents -->
+    <div class="panel-heading">房间信息</div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>roomId</th>
+                <th>人数</th>
+                <th>查看</th>
+            </tr>
+            </thead>
+            <tbody id="roomList">
+
+            </tbody>
+        </table>
+    </div>
+</body>
+</body>
+</html>

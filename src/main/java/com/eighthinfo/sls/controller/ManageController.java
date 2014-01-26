@@ -2,21 +2,24 @@ package com.eighthinfo.sls.controller;
 
 import com.eighthinfo.sls.model.Hall;
 import com.eighthinfo.sls.model.Room;
+import com.eighthinfo.sls.model.RoomPlayer;
+import com.eighthinfo.sls.service.AwardService;
 import com.eighthinfo.sls.service.HallService;
 import com.eighthinfo.sls.service.TopicService;
 import com.eighthinfo.sls.utils.ExcelReader;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dam on 13-12-12.
@@ -42,10 +45,24 @@ public class ManageController {
         return hallList;
     }
     @ResponseBody
-    @RequestMapping(value = "/get-room-list", method = RequestMethod.GET)
-    public List<Room> getRoomList() {
-        List<Room> roomList = hallService.getRoomList();
+    @RequestMapping(value = "/find-rooms-by-award/{awardId}", method = RequestMethod.GET)
+    public  List<Room> findRoomByAwardId(@PathVariable String awardId){
+
+        List<Room> roomList = new ArrayList<Room>();
+        if(StringUtils.isNotBlank(awardId)){
+            roomList = hallService.getRoomList(awardId);
+        }
         return roomList;
+    }
+    @ResponseBody
+    @RequestMapping(value = "/find-room-by-id/{roomId}", method = RequestMethod.GET)
+    public  List<RoomPlayer> findRoomById(@PathVariable String roomId){
+
+        List<RoomPlayer> playerList = new ArrayList<RoomPlayer>();
+        if(StringUtils.isNotBlank(roomId)){
+            playerList = hallService.findRoomById(roomId);
+        }
+        return playerList;
     }
     @RequestMapping(value = "/delete", method = RequestMethod.GET)
     public String delete() {
@@ -83,4 +100,9 @@ public class ManageController {
         }
         return result;
     }
+    @RequestMapping(value="room")
+    public String toFindRoom(){
+        return "/manage/findroom";
+    }
+
 }

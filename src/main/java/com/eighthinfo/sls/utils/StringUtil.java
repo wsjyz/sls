@@ -15,24 +15,21 @@ public class StringUtil {
     public static Map<String, Integer> getWeightMap(String key, String weightStr) {
         Map<String, Integer> weightMap = new HashMap<String, Integer>();
         if (weightStr.indexOf(".") != -1&& StringUtils.isNotBlank(key)) {
-            int backLength = weightStr.substring(weightStr.indexOf("."), weightStr.length()).length();
-            int num = Integer.parseInt(StringUtils.rightPad("1", backLength, "0"));
-            int weightNum = 0;
-            if(backLength == 2){
-                weightNum = Integer.parseInt(weightStr.substring(weightStr.lastIndexOf(".") + 1, weightStr.length()));
-            }else{
-                weightNum = Integer.parseInt(weightStr.substring(weightStr.lastIndexOf("0") + 1, weightStr.length()));
-            }
-
+            int backLength = weightStr.substring(weightStr.indexOf(".") + 1, weightStr.length()).length();
+            int num = Integer.parseInt(StringUtils.rightPad("1", backLength + 1, "0"));
+            int weightNum = Integer.parseInt(weightStr.substring(weightStr.lastIndexOf(".") + 1, weightStr.length()));
             int otherWeightNum = num - weightNum;
             weightMap.put(Constants.NO_WIN_A_PRIZE_KEY, otherWeightNum);
             weightMap.put(key, weightNum);
+        }else{
+            weightMap.put(Constants.NO_WIN_A_PRIZE_KEY, 0);
+            weightMap.put(key, 1);
         }
         return weightMap;
     }
 
     public static void main(String[] args) {
-        Map<String,Integer> map = getWeightMap("a", "0.1");
+        Map<String,Integer> map = getWeightMap("a", "1");
         for(Map.Entry<String,Integer> entry: map.entrySet()){
             System.out.println(entry.getKey()+" "+entry.getValue());
         }
